@@ -70,11 +70,21 @@
           this.setState({author: e.target.value});
         },
         onTextChange: function(e) {
-          this.setState(text: e.target.value});
+          this.setState({text: e.target.value});
+        },
+        onPostComment: function(e) {
+          e.preventDefault();
+          var author = this.state.author.trim();
+          var text = this.state.text.trim();
+          if (!text || !author) {
+            return;
+          }
+          // TODO: post to server
+          this.setState({author: '', text: ''});
         },
         render: function() {
           return (
-            <form classname="commentForm">
+            <form className="commentForm" onSubmit={this.onPostComment}>
               <input
                 type="text"
                 placeholder="Your name..."
